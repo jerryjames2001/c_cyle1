@@ -23,7 +23,7 @@ case 1:if(rear<=n)
        printf("enter the elements");
        scanf("%d",&item);
        a[x]=item;
-       x=(x+1)%10;
+       x++;
        break;
        }
        else
@@ -34,8 +34,13 @@ case 2:if(front!=n)
        else
        printf("Queue is empty");
        break;
-case 3:for(i=front;i<rear;i++)     
-       printf("%d\t",a[i]);
+case 3:if(front==0)
+       {for(i=front;i<rear;i++)     
+       printf("%d\t",a[i]);}
+       else
+       {
+       for(i=0;i<n;i++)
+       printf("%d\t",a[i]);}
        break;
 case 4:printf("\nExiting");
        break;
@@ -44,4 +49,3 @@ default:printf("\nWrong choice");
 }while(ch!=4);
 return 0;
 }
-
