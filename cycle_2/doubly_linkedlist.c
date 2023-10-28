@@ -176,7 +176,7 @@ int main() {
     struct Node* head = NULL;
     int choice, data, position, key;
 
-    while (1) {
+    do {
         printf("\nDoubly Linked List Operations:\n");
         printf("1. Insert at head\n");
         printf("2. Insert at tail\n");
@@ -242,6 +242,8 @@ int main() {
                 display(head);
                 break;
             case 9:break;
-}  
-}              
-    }            
+            default:printf("Invalid choice");
+}
+}while(choice!=9);             
+return 0;
+}          
