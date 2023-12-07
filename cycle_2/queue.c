@@ -1,39 +1,40 @@
 #include<stdio.h>
 int main()
 {
-int i,a[30],front=0,rear=0,ch,item;
+int n,x,i,front=0,end=0,a[10],ch;
+printf("\nEnter the limit of the queue\t");
+scanf("%d",&n);
 do
 {
-printf("\n enter the choice\n");
-printf("\n1.insertion\t 2.deletion\t 3.display\t4.exit\n");
+printf("\nMenu :\n1. Insert \t2. Display \t3. Delete \t4.Exit");
+printf("\nEnter your choice");
 scanf("%d",&ch);
 switch(ch)
 {
-case 1:printf("enter the elements");
-       scanf("%d",&item);
-       if(rear!=30)
+case 1:if(end<n)
        {
-       a[rear]=item;
-       rear++;
+       printf("\nEnter a number");
+       scanf("%d",&x);
+       a[end]=x;
+       end++;
        }
-       if(rear==30)
-       printf("array is full");
+       else
+       printf("\nQueue is full");
        break;
-  
-case 2:if(front!=30)
+case 2:printf("\nDisplaying\n");
+       for(i=front;i<end;i++)
+       printf("\t%d",a[i]);
+       break;
+case 3:if(front==n)
+       printf("\nQueue empty");
+       else
+       {
        front++;
-       if(front==30)
-       printf("Queue is empty");
-       break;
-
-case 3: for(i=front;i<rear;i++)     
-        printf("%d\t",a[i]);
-        break;
-
-case 4: printf("exiting");
-        break;
-
-default:printf("wrong choice");
+       printf("\nDeleted sucessfully");
+       }
+case 4:printf("\nExiting");
+break;
+default:printf("\nWrong choice");
 }
 }while(ch!=4);
 return 0;
