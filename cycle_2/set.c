@@ -1,145 +1,87 @@
-#include <stdio.h>
+#include<stdio.h>
+int main()
+{
+int ch,n1,n2,a[20],b[20],s[40],i,j,x=0,y=0,z=0,in[40],dif[20],found;
+printf("\nEnter the size of 1'st set");
+scanf("%d",&n1);
+printf("\nEnter the elements of set 1\t");
+for(i=0;i<n1;i++)
+scanf("%d",&a[i]);
+printf("\nEnter the size of 2'nd set");
+scanf("%d",&n2);
+printf("\nEnter the elements of set 2\t");
+for(i=0;i<n2;i++)
+scanf("%d",&b[i]);
+do{
+printf("\nEnter your choice\n");
+printf("1.Union \t 2.Intersection \t 3.Difference \t 4.Exit");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:printf("\nPerforming union operation");
+       for(i=0;i<n1;i++)
+       {
+        s[x]=a[i];
+        x++;
+       }
+       found=0;
+       for(i=0;i<n2;i++)
+       {
+       found=0;
+       for(j=0;j<n1;j++)
+       {
+        if(b[i]==a[j])
+        found=1;
+       }
+       if(found==0)
+       {
+       s[x]=b[i];
+       x++;
+       }
+       }
+       printf("\nUnion of set is\n");
+       for(i=0;i<x;i++)
+       printf("%d\t",s[i]);
+       break;
 
-#define MAX_SIZE 100
+case 2:printf("\nPerforming intersection\n");
+       for(i=0;i<n1;i++)
+       for(j=0;j<n2;j++)
+       {
+        if(a[i]==b[j])
+        {
+        in[z]=a[i];
+        z++;
+        }
+       }
+       printf("\nInsertion of set\n");
+       for(i=0;i<z;i++)
+       printf("%d\t",in[i]);
+       break;
 
-// Function to read elements of a set from the user
-int readSet(int set[]) {
-    int size, i;
+case 3:printf("\n Performing difference operation\n");
+       for(i=0;i<n1;i++)
+       {
+       found=0;
+       for(j=0;j<z;j++)
+       if(a[i]==in[j])
+       found=1;
+       if(found==0)
+       {
+       dif[y]=a[i];
+       y++;
+       }
+       }
+ 
+       for(i=0;i<y;i++)
+       printf("%d\t",dif[i]);
+       break;
 
-    printf("Enter the size of the set: ");
-    scanf("%d", &size);
+case 4:printf("\nExiting\n");
+       break;
 
-    printf("Enter elements of the set:\n");
-    for (i = 0; i < size; i++) {
-        scanf("%d", &set[i]);
-    }
-
-    return size;
+default:printf("\nWrong choice");
 }
-
-// Function to display the elements of a set
-void displaySet(int set[], int size) {
-    int i;
-
-    printf("Set: { ");
-    for (i = 0; i < size; i++) {
-        printf("%d ", set[i]);
-    }
-    printf("}\n");
-}
-
-// Function to perform set union
-int setUnion(int set1[], int size1, int set2[], int size2, int result[]) {
-    int i, j, k = 0;
-
-    for (i = 0; i < size1; i++) {
-        result[k++] = set1[i];
-    }
-
-    for (i = 0; i < size2; i++) {
-        int found = 0;
-        for (j = 0; j < size1; j++) {
-            if (set2[i] == set1[j]) {
-                found = 1;
-                break;
-            }
-        }
-        if (!found) {
-            result[k++] = set2[i];
-        }
-    }
-
-    return k;
-}
-
-// Function to perform set intersection
-int setIntersection(int set1[], int size1, int set2[], int size2, int result[]) {
-    int i, j, k = 0;
-
-    for (i = 0; i < size1; i++) {
-        for (j = 0; j < size2; j++) {
-            if (set1[i] == set2[j]) {
-                result[k++] = set1[i];
-                break;
-            }
-        }
-    }
-
-    return k;
-}
-
-// Function to perform set difference (set1 - set2)
-int setDifference(int set1[], int size1, int set2[], int size2, int result[]) {
-    int i, j, k = 0;
-
-    for (i = 0; i < size1; i++) {
-        int found = 0;
-        for (j = 0; j < size2; j++) {
-            if (set1[i] == set2[j]) {
-                found = 1;
-                break;
-            }
-        }
-        if (!found) {
-            result[k++] = set1[i];
-        }
-    }
-
-    return k;
-}
-
-int main() {
-    int set1[MAX_SIZE], set2[MAX_SIZE], result[MAX_SIZE];
-    int size1, size2, resultSize;
-    int choice;
-
-    size1 = readSet(set1);
-    size2 = readSet(set2);
-
-    do {
-        printf("\nSet Operations:\n");
-        printf("1. Union\n");
-        printf("2. Intersection\n");
-        printf("3. Difference (set1 - set2)\n");
-        printf("4. Display Sets\n");
-        printf("5. Quit\n");
-
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                resultSize = setUnion(set1, size1, set2, size2, result);
-                displaySet(result, resultSize);
-                break;
-
-            case 2:
-                resultSize = setIntersection(set1, size1, set2, size2, result);
-                displaySet(result, resultSize);
-                break;
-
-            case 3:
-                resultSize = setDifference(set1, size1, set2, size2, result);
-                displaySet(result, resultSize);
-                break;
-
-            case 4:
-                printf("\nSets:\n");
-                printf("Set 1: ");
-                displaySet(set1, size1);
-                printf("Set 2: ");
-                displaySet(set2, size2);
-                break;
-
-            case 5:
-                printf("Exiting...\n");
-                break;
-
-            default:
-                printf("Invalid choice. Please try again.\n");
-                break;
-        }
-    } while (choice != 5);
-
-    return 0;
+}while(ch!=4);
+return 0;
 }
